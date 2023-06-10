@@ -9,6 +9,7 @@ on:
     paths:
       - '**.kicad_sch'
       - '**.kicad_pcb'
+  workflow_dispatch:
 
 jobs:
   kibot:
