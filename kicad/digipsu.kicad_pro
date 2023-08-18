@@ -450,15 +450,15 @@
     },
     "net_colors": null,
     "netclass_assignments": {
-      "Net-(C2-Pad1)": "Power",
-      "Net-(D1-A)": "Power",
+      "GNDPWR": "Power",
       "Net-(D1-K)": "Power",
-      "Net-(J1-Pin_3)": "Power",
+      "Net-(J1-Pin_1)": "Power",
       "Net-(J2-Pin_3)": "Power",
       "Net-(Q3-C)": "Power",
       "Net-(Q3-E)": "Power",
       "Net-(Q4-C)": "Power",
-      "Net-(Q5-D)": "Power"
+      "Net-(U4B-+)": "Power",
+      "VBUS": "Power"
     },
     "netclass_patterns": [
       {
