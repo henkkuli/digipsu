@@ -458,7 +458,26 @@
       "Net-(Q3-E)": "Power",
       "Net-(Q4-C)": "Power",
       "Net-(U4B-+)": "Power",
-      "VBUS": "Power"
+      "Net-(U6-AGND)": "Small",
+      "Net-(U6-AVdd)": "Small",
+      "Net-(U6-CH0)": "Small",
+      "Net-(U6-CH2)": "Small",
+      "Net-(U6-CH4)": "Small",
+      "Net-(U6-DGND)": "Small",
+      "Net-(U6-DVdd)": "Small",
+      "Net-(U6-MCLK)": "Small",
+      "Net-(U6-REFIN+{slash}OUT)": "Small",
+      "Net-(U6-SCK)": "Small",
+      "Net-(U6-SDI)": "Small",
+      "Net-(U6-SDO)": "Small",
+      "Net-(U6-~{CS})": "Small",
+      "VBUS": "Power",
+      "unconnected-(U6-CH1-Pad6)": "Small",
+      "unconnected-(U6-CH3-Pad8)": "Small",
+      "unconnected-(U6-CH5-Pad10)": "Small",
+      "unconnected-(U6-CH6-Pad11)": "Small",
+      "unconnected-(U6-CH7-Pad12)": "Small",
+      "unconnected-(U6-~{IRQ}{slash}MDAT-Pad17)": "Small"
     },
     "netclass_patterns": [
       {
