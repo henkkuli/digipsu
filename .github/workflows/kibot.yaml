@@ -3,7 +3,9 @@ name: kibot
 on:
   push:
     paths:
-    - '**.kicad_sch'
+    - '.github/workflows/kibot.yaml'
+    - '**.kibot.yaml'
+    - '**.kicad_pcb'
     - '**.kicad_pcb'
   pull_request:
     paths:

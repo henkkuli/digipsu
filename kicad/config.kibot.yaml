@@ -28,21 +28,6 @@ import:
     _KIBOT_MANF_DIR: Manufacturers/PCBWay
 
 outputs:
-- name: basic_blender_export
-  comment: 3D view from top/30 deg/bottom (Blender)
-  type: blender_export
-  dir: 3D
-  options:
-    pcb3d: _PCB2Blender_2_1
-    outputs:
-    - type: render
-    - type: blender
-    point_of_view:
-    - view: top
-    - rotate_x: 30
-      rotate_z: -20
-      file_id: _30deg
-    - view: bottom
 - name: basic_boardview
   comment: Board View export
   type: boardview
@@ -133,85 +118,85 @@ outputs:
     count_smd_tht: true
     xlsx:
       style: modern-red
-- name: costs_bom_xlsx
-  comment: Costs Bill of Materials in XLSX format
-  type: bom
-  dir: BoM/Costs
-  options:
-    format: XLSX
-    count_smd_tht: true
-    xlsx:
-      style: modern-green
-      kicost: true
-      specs: true
-      kicost_api_disable: KitSpace
-    pre_transform: _kicost_rename
-- name: basic_diff_pcb
-  comment: PCB diff between the last two changes
-  type: diff
-  dir: diff
-  layers:
-  - layer: F.Cu
-    suffix: F_Cu
-    description: Front copper
-  - layer: B.Cu
-    suffix: B_Cu
-    description: Bottom copper
-  - layer: F.Paste
-    suffix: F_Paste
-    description: Front solder paste
-  - layer: B.Silkscreen
-    suffix: B_Silkscreen
-    description: Bottom silkscreen (artwork)
-  - layer: F.Silkscreen
-    suffix: F_Silkscreen
-    description: Front silkscreen (artwork)
-  - layer: B.Mask
-    suffix: B_Mask
-    description: Bottom soldermask (negative)
-  - layer: F.Mask
-    suffix: F_Mask
-    description: Front soldermask (negative)
-  - layer: User.Drawings
-    suffix: User_Drawings
-    description: User drawings
-  - layer: User.Comments
-    suffix: User_Comments
-    description: User comments
-  - layer: Edge.Cuts
-    suffix: Edge_Cuts
-    description: Board shape
-  - layer: B.Courtyard
-    suffix: B_Courtyard
-    description: Bottom courtyard area
-  - layer: F.Courtyard
-    suffix: F_Courtyard
-    description: Front courtyard area
-  - layer: B.Fab
-    suffix: B_Fab
-    description: Bottom documentation
-  - layer: F.Fab
-    suffix: F_Fab
-    description: Front documentation
-  options:
-    old: KIBOT_LAST-1
-    old_type: git
-    new: HEAD
-    new_type: git
-    cache_dir: /home/henrik/git/digipsu/.cache
-    add_link_id: true
-- name: basic_diff_sch
-  comment: Schematic diff between the last two changes
-  type: diff
-  dir: diff
-  options:
-    old: KIBOT_LAST-1
-    old_type: git
-    new: HEAD
-    new_type: git
-    cache_dir: /home/henrik/git/digipsu/.cache
-    add_link_id: true
-    pcb: false
+# - name: costs_bom_xlsx
+#   comment: Costs Bill of Materials in XLSX format
+#   type: bom
+#   dir: BoM/Costs
+#   options:
+#     format: XLSX
+#     count_smd_tht: true
+#     xlsx:
+#       style: modern-green
+#       kicost: true
+#       specs: true
+#       kicost_api_disable: KitSpace
+#     pre_transform: _kicost_rename
+# - name: basic_diff_pcb
+#   comment: PCB diff between the last two changes
+#   type: diff
+#   dir: diff
+#   layers:
+#   - layer: F.Cu
+#     suffix: F_Cu
+#     description: Front copper
+#   - layer: B.Cu
+#     suffix: B_Cu
+#     description: Bottom copper
+#   - layer: F.Paste
+#     suffix: F_Paste
+#     description: Front solder paste
+#   - layer: B.Silkscreen
+#     suffix: B_Silkscreen
+#     description: Bottom silkscreen (artwork)
+#   - layer: F.Silkscreen
+#     suffix: F_Silkscreen
+#     description: Front silkscreen (artwork)
+#   - layer: B.Mask
+#     suffix: B_Mask
+#     description: Bottom soldermask (negative)
+#   - layer: F.Mask
+#     suffix: F_Mask
+#     description: Front soldermask (negative)
+#   - layer: User.Drawings
+#     suffix: User_Drawings
+#     description: User drawings
+#   - layer: User.Comments
+#     suffix: User_Comments
+#     description: User comments
+#   - layer: Edge.Cuts
+#     suffix: Edge_Cuts
+#     description: Board shape
+#   - layer: B.Courtyard
+#     suffix: B_Courtyard
+#     description: Bottom courtyard area
+#   - layer: F.Courtyard
+#     suffix: F_Courtyard
+#     description: Front courtyard area
+#   - layer: B.Fab
+#     suffix: B_Fab
+#     description: Bottom documentation
+#   - layer: F.Fab
+#     suffix: F_Fab
+#     description: Front documentation
+#   options:
+#     old: KIBOT_LAST-1
+#     old_type: git
+#     new: HEAD
+#     new_type: git
+#     cache_dir: /home/henrik/git/digipsu/.cache
+#     add_link_id: true
+# - name: basic_diff_sch
+#   comment: Schematic diff between the last two changes
+#   type: diff
+#   dir: diff
+#   options:
+#     old: KIBOT_LAST-1
+#     old_type: git
+#     new: HEAD
+#     new_type: git
+#     cache_dir: /home/henrik/git/digipsu/.cache
+#     add_link_id: true
+#     pcb: false
 - name: basic_download_datasheets
   comment: Download the datasheets
   type: download_datasheets
