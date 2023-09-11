@@ -8,85 +8,37 @@ global:
   - number: 1007
   - number: 1015
   - number: 58
+  output: '%f-%i%I%v-%S.%x'
+
+variants:
+  - name: controller
+    type: ibom
+    sub_pcbs:
+    - name: Controller
+      reference: B1
+
+  - name: ui
+    type: ibom
+    sub_pcbs:
+    - name: UI
+      reference: B2
 
 import:
 - file: CheckZoneFill
+- file: board.kibot.yaml
+  definitions:
+    VARIANT: controller[Controller]
+- file: board.kibot.yaml
+  definitions:
+    VARIANT: ui[UI]
 
 outputs:
-- name: basic_boardview
-  comment: Board View export
-  type: boardview
-  dir: Assembly
-- name: generic_bom_html
-  comment: Generic Bill of Materials in HTML format
-  type: bom
-  dir: BoM/Generic
-  options:
-    format: HTML
-    count_smd_tht: true
 
-- name: basic_download_datasheets
-  comment: Download the datasheets
+- name: download_datasheets
+  comment: Datasheets for components
   type: download_datasheets
   dir: Datasheets
 
-- name: basic_gerb_drill
-  comment: Drill files in GERB_DRILL format
-  type: gerb_drill
-  dir: Gerbers_and_Drill
-  options:
-    map: gerber
-- name: gerber_modern
-  comment: Gerbers in modern format, recommended by the standard
-  type: gerber
-  dir: Gerbers_and_Drill
-  layers:
-  - layer: F.Cu
-    suffix: F_Cu
-    description: Front copper
-  - layer: B.Cu
-    suffix: B_Cu
-    description: Bottom copper
-  - layer: F.Paste
-    suffix: F_Paste
-    description: Front solder paste
-  - layer: B.Silkscreen
-    suffix: B_Silkscreen
-    description: Bottom silkscreen (artwork)
-  - layer: F.Silkscreen
-    suffix: F_Silkscreen
-    description: Front silkscreen (artwork)
-  - layer: B.Mask
-    suffix: B_Mask
-    description: Bottom soldermask (negative)
-  - layer: F.Mask
-    suffix: F_Mask
-    description: Front soldermask (negative)
-  - layer: User.Drawings
-    suffix: User_Drawings
-    description: User drawings
-  - layer: User.Comments
-    suffix: User_Comments
-    description: User comments
-  - layer: Edge.Cuts
-    suffix: Edge_Cuts
-    description: Board shape
-  - layer: B.Courtyard
-    suffix: B_Courtyard
-    description: Bottom courtyard area
-  - layer: F.Courtyard
-    suffix: F_Courtyard
-    description: Front courtyard area
-  - layer: B.Fab
-    suffix: B_Fab
-    description: Bottom documentation
-  - layer: F.Fab
-    suffix: F_Fab
-    description: Front documentation
-- name: basic_ibom
-  comment: Interactive HTML BoM
-  type: ibom
-  dir: Assembly
 - name: basic_info
   comment: Information about the run
   type: info
@@ -96,212 +48,35 @@ outputs:
   type: kikit_present
   dir: Presentation
   options:
-    description: '# Presentation for digipsu
-
-      This is an automatically generated presentation page'
+    description: ../README.md
     boards:
-      mode: local
+    - mode: local
+      name: Controller
       comment: Resources included
-      front_image: renderer_for_present
-      back_image: renderer_for_present
-      gerbers: gerbers_for_present
-- name: renderer_for_present
-  comment: Renderer for the presentation
-  type: pcbdraw
-  dir: Render_for_presentation
-  run_by_default: false
-- name: gerbers_for_present
-  comment: Gerbers for the presentation
-  type: gerber
-  dir: Gerber_for_presentation
-  layers: copper
-  run_by_default: false
-- name: basic_navigate_results
+      front_image: pcbdraw-top-controller[Controller]
+      back_image: pcbdraw-bottom-controller[Controller]
+      gerbers: present-gerber-controller[Controller]
+      pcb_from_output: present-variant-controller[Controller]
+    - mode: local
+      name: User Interface
+      comment: Resources included
+      front_image: pcbdraw-top-ui[UI]
+      back_image: pcbdraw-bottom-ui[UI]
+      gerbers: present-gerber-ui[UI]
+      pcb_from_output: present-variant-ui[UI]
+
+- name: schematic-pdf
+  comment: Schematic in PDF format
+  type: pdf_sch_print
+  dir: Schematic
+
+- name: web-navigation
   comment: Web page to browse the results
   type: navigate_results
   dir: Browse
   options:
     link_from_root: index.html
     skip_not_run: true
-- name: classic_netlist
-  comment: Schematic netlist in KiCad format
-  type: netlist
-  dir: Export
-- name: basic_pcb_print_pdf
-  comment: PCB
-  type: pcb_print
-  dir: PCB/PDF
-  options:
-    format: PDF
-    pages:
-    - layers:
-      - layer: F.Cu
-      - layer: F.Mask
-        color: '#14332440'
-      - layer: F.Paste
-      - layer: F.Silkscreen
-      - layer: Edge.Cuts
-      - layer: User.Drawings
-      - layer: User.Comments
-      sheet: Front copper
-    - layers:
-      - layer: B.Cu
-      - layer: B.Mask
-        color: '#14332440'
-      - layer: B.Silkscreen
-      - layer: Edge.Cuts
-      - layer: User.Drawings
-      - layer: User.Comments
-      mirror: true
-      sheet: Bottom copper
-    - layers:
-      - layer: B.Courtyard
-      - layer: Edge.Cuts
-      - layer: User.Drawings
-      - layer: User.Comments
-      mirror: true
-      sheet: Bottom courtyard area
-    - layers:
-      - layer: F.Courtyard
-      - layer: Edge.Cuts
-      - layer: User.Drawings
-      - layer: User.Comments
-      sheet: Front courtyard area
-    - layers:
-      - layer: B.Fab
-      - layer: Edge.Cuts
-      - layer: User.Drawings
-      - layer: User.Comments
-      mirror: true
-      sheet: Bottom documentation
-    - layers:
-      - layer: F.Fab
-      - layer: Edge.Cuts
-      - layer: User.Drawings
-      - layer: User.Comments
-      sheet: Front documentation
-    keep_temporal_files: true
-- name: basic_pcb_print_svg
-  comment: PCB
-  type: pcb_print
-  dir: PCB/SVG
-  options:
-    format: SVG
-    pages:
-    - layers:
-      - layer: F.Cu
-      - layer: F.Mask
-        color: '#14332440'
-      - layer: F.Paste
-      - layer: F.Silkscreen
-      - layer: Edge.Cuts
-      - layer: User.Drawings
-      - layer: User.Comments
-      sheet: Front copper
-    - layers:
-      - layer: B.Cu
-      - layer: B.Mask
-        color: '#14332440'
-      - layer: B.Silkscreen
-      - layer: Edge.Cuts
-      - layer: User.Drawings
-      - layer: User.Comments
-      mirror: true
-      sheet: Bottom copper
-    - layers:
-      - layer: B.Courtyard
-      - layer: Edge.Cuts
-      - layer: User.Drawings
-      - layer: User.Comments
-      mirror: true
-      sheet: Bottom courtyard area
-    - layers:
-      - layer: F.Courtyard
-      - layer: Edge.Cuts
-      - layer: User.Drawings
-      - layer: User.Comments
-      sheet: Front courtyard area
-    - layers:
-      - layer: B.Fab
-      - layer: Edge.Cuts
-      - layer: User.Drawings
-      - layer: User.Comments
-      mirror: true
-      sheet: Bottom documentation
-    - layers:
-      - layer: F.Fab
-      - layer: Edge.Cuts
-      - layer: User.Drawings
-      - layer: User.Comments
-      sheet: Front documentation
-    keep_temporal_files: true
-    add_background: true
-- name: basic_pcbdraw_svg_jlcpcb_green_enig_top
-  comment: PCB 2D render in SVG format, using jlcpcb-green-enig style
-  type: pcbdraw
-  dir: PCB/2D_render/jlcpcb_green_enig
-  options:
-    style: jlcpcb-green-enig
-    format: svg
-- name: basic_pcbdraw_svg_jlcpcb_green_enig_bottom
-  comment: PCB 2D render in SVG format, using jlcpcb-green-enig style
-  type: pcbdraw
-  dir: PCB/2D_render/jlcpcb_green_enig
-  options:
-    style: jlcpcb-green-enig
-    format: svg
-    bottom: true
-- name: basic_pdf
-  comment: Individual layers in PDF format
-  type: pdf
-  dir: Individual_Layers/PDF
-  layers:
-  - layer: F.Cu
-    suffix: F_Cu
-    description: Front copper
-  - layer: B.Cu
-    suffix: B_Cu
-    description: Bottom copper
-  - layer: F.Paste
-    suffix: F_Paste
-    description: Front solder paste
-  - layer: B.Silkscreen
-    suffix: B_Silkscreen
-    description: Bottom silkscreen (artwork)
-  - layer: F.Silkscreen
-    suffix: F_Silkscreen
-    description: Front silkscreen (artwork)
-  - layer: B.Mask
-    suffix: B_Mask
-    description: Bottom soldermask (negative)
-  - layer: F.Mask
-    suffix: F_Mask
-    description: Front soldermask (negative)
-  - layer: User.Drawings
-    suffix: User_Drawings
-    description: User drawings
-  - layer: User.Comments
-    suffix: User_Comments
-    description: User comments
-  - layer: Edge.Cuts
-    suffix: Edge_Cuts
-    description: Board shape
-  - layer: B.Courtyard
-    suffix: B_Courtyard
-    description: Bottom courtyard area
-  - layer: F.Courtyard
-    suffix: F_Courtyard
-    description: Front courtyard area
-  - layer: B.Fab
-    suffix: B_Fab
-    description: Bottom documentation
-  - layer: F.Fab
-    suffix: F_Fab
-    description: Front documentation
-- name: basic_pdf_sch_print
-  comment: Schematic in PDF format
-  type: pdf_sch_print
-  dir: Schematic
 
 ...
 definitions:
