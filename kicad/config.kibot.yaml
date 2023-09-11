@@ -48,7 +48,7 @@ outputs:
   type: kikit_present
   dir: Presentation
   options:
-    description: ../README.md
+    description: README.md
     boards:
     - mode: local
       name: Controller
