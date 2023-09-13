@@ -78,6 +78,16 @@ outputs:
   - layer: F.Fab
     suffix: F_Fab
     description: Front documentation
+- name: gerber-compress-@VARIANT@
+  comment: Compress gerber files and drill files
+  type: compress
+  dir: Gerbers_and_Drill
+  options:
+    files:
+    - from_output: gerb_drill-@VARIANT@
+      dest: /
+    - from_output: gerber-@VARIANT@
+      dest: /
 
 - name: pcb-print-pdf-@VARIANT@
   comment: PCB
