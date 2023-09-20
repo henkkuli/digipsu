@@ -4854,8 +4854,8 @@
     (property "Datasheet" "~" (at 39.37 55.88 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 074dc00a-616f-419a-bde5-adb02f777512))
-    (pin "2" (uuid 4e073dfa-153b-408d-82a1-5446d406dd97))
+    (pin "1" (uuid ad3d9e6c-ac84-4a2b-b9ed-1c14dc982816))
+    (pin "2" (uuid 74663cc8-8da4-4897-a91f-8e4898466408))
     (instances
       (project "digipsu"
         (path "/ec5fec7a-fde3-4f44-b689-61159deeeb72"
